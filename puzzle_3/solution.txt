@@ -1,0 +1,6 @@
+get .srt & audio tracks from .mkv
+Use order in .srt to combine audio tracks into full file
+Remove frequencies <15000Hz
+Plot frequencies and find peaks at -62db, use keymap.txt to map frequencies to letters
+yorker repeatedly automated
+
