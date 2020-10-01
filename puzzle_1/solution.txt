@@ -1,0 +1,15 @@
+Step 1)
+Notice this comment in /src/App.js/ - 
+
+// congrats on getting this far! your password is the same as your username.
+
+Step 2)
+Notice that jquery-3.5.1.js is not served from a CDN - suspicious
+A diff between the provided file and the live jquery-3.5.1.js shows that the following modifications are present:
+
+Step 3)
+Use Chrome Dev Tools Local overrides to overide jquery-3.5.1.js & remove the string added to the hash
+
+Profit!
+count multiple magic
+
