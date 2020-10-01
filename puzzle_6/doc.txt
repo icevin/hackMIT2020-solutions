@@ -1,0 +1,91 @@
+ISA Overview
+This puzzle gives you access to a 32-bit machine, with 32 general purpose registers, referenced x0-x31. x0 is hardwired to 0 (writes to x0 have no effect). The machine also maintains a cycle counter that can be read with a dedicated instruction.
+
+On initialization, the machine begins executing at PC = 0 (the first instruction in your submitted code). The cache begins empty and all registers and the user memory region are initialized to 0. The machine halts if the PC ever reaches an address that doesn't point at any valid code, or after executing 2500 instructions.
+
+This machine's ISA is similar to RISC-V, but there are some slight differences and simplifications, so read the documentation carefully.
+
+Assembly Syntax
+Instructions
+Instructions are written starting with an opcode, followed by a comma separated list of operands, as shown in the instruction listings below. An operand may either be a register (in the listings: rd, rs1, rs2) or an immediate (in the listings: imm). Registers can be referenced by names r0-r31, x0-x31, or through their RISC-V ABI names (see page 3 of this document). In listings, rd refers to the destination register (where a data value is stored). For example:
+
+add x3, x1, x2 Adds x1 and x2 and stores the result in x3
+rdcycles x5Stores contents of cycle counter in x5
+Immediates are plain numbers embedded directly in the assembly code. Unlike RISC-V, arithmetic immediates can be up to 32 bits wide (signed). You can express immediates either as base-10 integers, or base-16 integers starting with an 0x prefix. For example:
+
+5 is a valid immediate.
+-1 is a valid immediate equal to -1 and stored as 0xFFFFFFFF, which -1 as a 32 bit signed number.
+0x1f is a valid immediate equal to 31 in decimal.
+2147483649 is an invalid immediate, it is too large to be represented as a 32 bit signed integer.
+3.5 is an invalid immediate, it is not an integer.
+Some instructions use an addressing scheme where an immediate is added to the contents of a register in order to generate a memory address. This applies to loads, stores, and indirect jumps (jalr). For example:
+
+lw x1, 4(x2) loads the contents of memory address x2 + 4 in x1.
+sw x1, 0(x3) stores the contents of x1 at memory address x3.
+jalr x0, 4(x1) jumps to the address in the code specified by x1 + 4.
+Instructions can be preceeded by an arbitrary amount of whitespace on their line.
+
+Comments
+Comments are specified by the character "#". Any text following a "#" will not be interpreted by the machine. For example:
+
+# this line is completely ignored
+add x3, x1, x2 # this stores x1+x2 in x3. this text is ignored.
+Labels
+Labels are used to refer to certain points in the code for the purpose of specifying jump and branch targets (as well as for exception handling, see "Memory System" section).
+
+Labels are specified through a line of code ending in a colon. For example:
+
+loop:
+addi x1, x1, 1
+jal x0, loop
+In this snippet, the "loop" label refers to the first instruction ("addi ..."), and the jal instruction unconditionally jumps back to the loop label's target whenever it is executed. Therefore, this code snippet represents an infinite loop that increments register x1 on each iteration.
+
+Instruction Listings
+Arithmetic:
+add[i] rd, rs1, [rs2/imm] (Addition)
+sub[i] rd, rs1, [rs2/imm] (Subtraction)
+mul[i] rd, rs1, [rs2/imm] (Multiplication)
+and[i] rd, rs1, [rs2/imm] (Bitwise and)
+or[i]  rd, rs1, [rs2/imm] (Bitwise or)
+xor[i] rd, rs1, [rs2/imm] (Bitwise xor)
+sll[i] rd, rs1, [rs2/imm] (Shift left)
+sra[i] rd, rs1, [rs2/imm] (Arithmetic shift right)
+srl[i] rd, rs1, [rs2/imm] (Logical shift left)
+"i" suffix indicates immediate value as last operand.
+Branch:
+beq  rs1, rs2 [target] (Branch if equal)
+bne  rs1, rs2 [target] (Branch if not equal)
+blt  rs1, rs2 [target] (Branch if less than)
+bge  rs1, rs2 [target] (Branch if greater or equal to)
+bltu rs1, rs2 [target] (Branch if less than, unsigned)
+bgeu rs1, rs2 [target] (Branch if greater than or equal to, unsigned)
+Branch instructions jump to the specified target if the specified condition is true for operands rs1 and rs2, and they proceed to the next subsequent instruction if not.
+
+Jump:
+jal rd, [target] (Jump and link)
+jumps to target, stores pc+4 in rd
+jalr rd, imm(rs1) (Jump and link register)
+jumps to rs1+imm, stores pc+4 in rd
+All branch and jump targets are specified as labels in the code, not addresses or offsets (with the exception of the indirect jumps implemented by jalr).
+
+All instructions are considered to be 4 bytes wide. In addition, all instructions in your submitted code are considered to be inserted into their own memory space sequentially, starting from 0. Therefore, the address of any instruction (for the purposes of jalr) is equivalent to 4 * the index of that instruction in your code listing.
+
+Memory:
+lw rd, imm(rs1) (Load word)
+lh rd, imm(rs1) (Load half word [2 bytes])
+lb rd, imm(rs1) (Load byte)
+sw rs1, imm(rd) (Store word)
+sh rs1, imm(rd) (Store half word [2 bytes])
+sb rs1, imm(rd) (Store byte)
+Unlike RISC-V, all partial loads and stores are treated as unsigned (values are zero-extended to fill the 32-bit write destination).
+Special:
+cflush (Cache flush)
+empties all state in cache
+rdcycles rd (Read cycle counter)
+writes current value of cycle counter into rd
+All instructions execute in one cycle, with the exception of loads, which may take longer depending on the cache state.
+
+Memory System
+This machine has 128 KB of memory. The upper half of the memory region is protected, meaning your user code cannot access it. If you try to read from or write to protected memory, an exception is thrown and the CPU jumps to the "exception" code label (if it exists, otherwise the machine will halt and return with an error). x30 is overwritten with the faulting memory address, and x31 is overwritten with the PC where the exception occurred.
+
+This is the only exception that can be handled at runtime - all others will cause the machine to halt and return information about the exception.
