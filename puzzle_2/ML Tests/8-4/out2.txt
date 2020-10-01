@@ -1,0 +1,14 @@
+2020-08-06 17:30:57.767822: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'libcudart.so.10.1'; dlerror: libcudart.so.10.1: cannot open shared object file: No such file or directory
+2020-08-06 17:30:57.768103: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2020-08-06 17:31:01.208093: W tensorflow/stream_executor/platform/default/dso_loader.cc:59] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory
+2020-08-06 17:31:01.208313: W tensorflow/stream_executor/cuda/cuda_driver.cc:312] failed call to cuInit: UNKNOWN ERROR (303)
+2020-08-06 17:31:01.208505: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (DESKTOP-GNBVFC4): /proc/driver/nvidia/version does not exist
+2020-08-06 17:31:01.208903: I tensorflow/core/platform/cpu_feature_guard.cc:142] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN)to use the following CPU instructions in performance-critical operations:  AVX2 FMA
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2020-08-06 17:31:01.216109: I tensorflow/core/platform/profile_utils/cpu_utils.cc:104] CPU Frequency: 3501000000 Hz
+2020-08-06 17:31:01.216969: I tensorflow/compiler/xla/service/service.cc:168] XLA service 0x3cfe3e0 initialized for platform Host (this does not guarantee that XLA will be used). Devices:
+2020-08-06 17:31:01.217180: I tensorflow/compiler/xla/service/service.cc:176]   StreamExecutor device (0): Host, Default Version
+Traceback (most recent call last):
+  File "trim.py", line 92, in <module>
+    img = Image.fromarray(data.reshape((69,69)).astype('uint8')*255)
+ValueError: cannot reshape array of size 14283 into shape (69,69)

@@ -1,0 +1,14 @@
+Thought process - 
+
+10,000 images => 10,000 rows in assignment.txt. 
+(x,y) looks like coords - this probably corresponds to an image.
+Max is (68, 68) - definitely square, each coordinate from (0,0) to (68,68) is represented, with 4761 (69^2) coordinates
+    - QR code?
+
+I'd imagine that black/white is represented by airplane/cat or vice versa
+
+
+
+
+Ended up manually classifying, took ~2 hours
+north turpitude outstanding
