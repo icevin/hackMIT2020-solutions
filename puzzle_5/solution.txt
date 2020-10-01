@@ -1,0 +1,39 @@
+y: advance one reg step, adds prev_reg to curr_reg
+n: quits & dump debug
+f: speeds up current register
+s: slows down current register, does register but also adds one to limit before it goes to next
++: advance one reg step, add one to cur_reg
+-: advance one reg step, subtract from cur_reg
+c: advance one reg step, flips register direction
+b: advance one reg step, sets breakpoint at current pc
+a: advance one reg step, return to breakpoint
+
+
+score: register values
+pc: program counter
+pc_dir: program counter direction
+step: max 215
+unused_breaks:
+used_breaks:
+cur_reg:
+prev_reg:
+reg_dir:
+steps_per_reg:
+cur_reg_steps:
+
+1: 
++bbbbbcyyyya
+scores: [75025, 46368]
+Congrats! Your flag is "giles"
+
+2:
++++cybbbbbbbbbbbbbbbbbcsfcyc+yysfc---a
+
+scores: [24157817, 39088169, 63245986]
+Congrats! Your flag is "want"
+
+
+3:
++++++++++++++bbbbbbbbcycycycacycycycycy---a---a---ayyy
+scores: [100, 100, 100, 100]
+Congrats! Your flag is "window"

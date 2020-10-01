@@ -1,0 +1,55 @@
+Calculate 39th fib number 63,245,986
+
+
+0 0 0
+1 0 0
+1 1 0
+
+
+
+
+1 + 1 = 2
+1 + 2 = 3
+2 + 3 = 5
+3 + 5 = 8
+5 + 8 = 13
+8 + 13 = 21
+13 + 21 = 
+
+
+a       + b     = a+b
+b       + a+b   = a+2b
+a+b     + a+2b  = 2a+3b
+
++b    +a+b      +a+2b
+
+yc+yy---
+
+yc+yysfc---
+
++++aa+caayc+yy---
+
++++aa+caayc+yysss---+-cn
+
+
++++aa+caayc+yysssc---n
+
++++aa+caayc+yysfc---n
+
+
++++aa+cbbbcsfcyc+yysfc---a
+
++++aa+cbbbbbbbbbbbbbbbbbcsfcyc+yysfc---a
+
+
++++cybbbyc+yysfc---a
+
+
++++cyb
+
+
+
++++aa+cabbbbbbbbbbbbbbbbcsfcyc+yysfc---a
+
+
++++cybbbbbbbbbbbbbbbbbcsfcyc+yysfc---a
