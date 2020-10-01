@@ -1,0 +1,15 @@
+user
+    id
+    username
+    year
+    gender
+    favorite_color
+    password_1ef45a6a
+    admin
+grade
+    id
+    user_id
+    classname
+    grade
+    code
+    credits

